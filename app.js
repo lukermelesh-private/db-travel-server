@@ -5,9 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var app = express();
 
 // view engine setup
@@ -27,55 +24,224 @@ app.use(express.static(path.join(__dirname, 'public')));
 const users = [
   {
     id: '1',
+    name: 'Juozas Juozaitis',
     type: 'regular',
     availability: [{from: new Date('2019-04-21T00:00:00').getTime(), to: new Date('2019-04-01T00:00:00').getTime()}],
-    trips: ['1', '2']
+    trips: ['1', '2', '3', '4', '5']
+  },
+  {
+    id: '2',
+    name: 'Andrius Butkevicius',
+    type: 'regular',
+    availability: [{from: new Date('2019-04-21T00:00:00').getTime(), to: new Date('2019-04-01T00:00:00').getTime()}],
+    trips: ['6']
+  },
+  {
+    id: '3',
+    name: 'Tomas Brezinskas',
+    type: 'regular',
+    availability: [{from: new Date('2019-04-21T00:00:00').getTime(), to: new Date('2019-04-01T00:00:00').getTime()}],
+    trips: ['7']
   }
 ];
 
 const trips = [
   {
     id: '1',
-    travelers: ['1'],
+    travellers: [{id: '1', name: 'Juozas Juozaitis'}],
     from: new Date('2019-05-11T00:00:00').getTime(),
     to: new Date('2019-05-18T00:00:00').getTime(),
-    department: 'R&D',
     destination: 'Kaunas',
-    details: {
+    origin: 'Vilnius',
+    details: [{
       userId: '1',
-      tickets: 'Lietuvos Gelezinkeliai',
-      apartments: ['1'],
+      department: 'R&D',
+      tickets: [{title: 'Lietuvos Gelezinkeliai', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}],
+      accommodation: {
+    location: 'Narutis Hotel',
+    files: [
+      {title: 'NARUTIS_SUPER_ULTRA_HOTEL_5_STARS_SUPER_TURBO_GET_IT_NOW_MEOW', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'},
+    ]
+  },
       status: 'approved'
-    }
+    }]
   },
   {
     id: '2',
-    travelers: ['1'],
+    travellers: [{id: '1', name: 'Juozas Juozaitis'}],
     from: new Date('2019-05-19T00:00:00').getTime(),
     to: new Date('2019-05-22T00:00:00').getTime(),
-    department: 'R&D',
+    origin: 'Vilnius',
     destination: 'Riga',
-    details: {
+    details: [{
       userId: '1',
-      tickets: 'Air Baltic',
-      apartments: ['2'],
+      department: 'R&D',
+      tickets: [{title: 'AIRBALTIC123321', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}, {title: 'AIRBALTIC144420', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}],
+      accommodation:
+  {
+    location: 'DB Apartment 1',
+  },
+      status: 'rejected'
+    }]
+  },
+  {
+    id: '3',
+    travellers: [{id: '1', name: 'Juozas Juozaitis'}],
+    from: new Date('2019-05-19T00:00:00').getTime(),
+    to: new Date('2019-05-22T00:00:00').getTime(),
+    origin: 'Vilnius',
+    destination: 'Riga',
+    details: [{
+      userId: '1',
+      department: 'R&D',
+      tickets: [{title: 'AIRBALTIC123321', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}, {title: 'AIRBALTIC144420', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}],
+      accommodation:
+  {
+    location: 'DB Apartment 1',
+  },
+      status: 'completed'
+    }]
+  },
+  {
+    id: '4',
+    travellers: [{id: '1', name: 'Juozas Juozaitis'}],
+    from: new Date('2019-05-19T00:00:00').getTime(),
+    to: new Date('2019-05-22T00:00:00').getTime(),
+    origin: 'Vilnius',
+    destination: 'Riga',
+    details: [{
+      userId: '1',
+      department: 'R&D',
+      tickets: [{title: 'AIRBALTIC123321', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}, {title: 'AIRBALTIC144420', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}],
+      accommodation:
+  {
+    location: 'DB Apartment 1',
+  },
       status: 'pending'
-    }
+    }]
+  },
+  {
+    id: '5',
+    travellers: [{id: '1', name: 'Juozas Juozaitis'}],
+    from: new Date('2019-05-19T00:00:00').getTime(),
+    to: new Date('2019-05-22T00:00:00').getTime(),
+    origin: 'Vilnius',
+    destination: 'Riga',
+    details: [{
+      userId: '1',
+      department: 'R&D',
+      tickets: [{title: 'AIRBALTIC123321', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}, {title: 'AIRBALTIC144420', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}],
+      accommodation:
+  {
+    location: 'DB Apartment 1',
+  },
+      status: 'pending'
+    }]
+  },
+  {
+    id: '6',
+    travellers: [{id: '2', name: 'Andrius Butkevicius'}, {id: '1', name: 'Juozas Juozaitis'}, {id: '3', name: 'Tomas Brezinskas'}],
+    from: new Date('2019-05-19T00:00:00').getTime(),
+    to: new Date('2019-05-22T00:00:00').getTime(),
+    origin: 'Vilnius',
+    destination: 'Riga',
+    details: [{
+      userId: '1',
+      department: 'R&D',
+      tickets: [{title: 'AIRBALTIC123321', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}, {title: 'AIRBALTIC144420', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}],
+      accommodation:
+  {
+    location: 'DB Apartment 1',
+  },
+      status: 'pending'
+    },
+    {
+      userId: '3',
+      department: 'R&D',
+      tickets: [{title: 'AIRBALTIC123321', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}, {title: 'AIRBALTIC144420', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}],
+      accommodation:
+  {
+    location: 'Hotel 69',
+    files: [
+      {title: 'Confirmation123', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'},
+    ]
+
+  },
+      status: 'pending'
+    }]
+  },
+  {
+    id: '7',
+    travellers: [{id: '3', name: 'Tomas Brezinskas'}],
+    from: new Date('2019-05-19T00:00:00').getTime(),
+    to: new Date('2019-05-22T00:00:00').getTime(),
+    origin: 'Vilnius',
+    destination: 'Riga',
+    details: [{
+      userId: '1',
+      department: 'R&D',
+      tickets: [{title: 'AIRBALTIC123321', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}, {title: 'AIRBALTIC144420', url: 'http://www.w3schools.com/images/myw3schoolsimage.jpg'}],
+      accommodation:
+  {
+    apartment: '3',
+  },
+      status: 'pending'
+    }]
   }
 ];
 
-app.use('/user/:userId', function (req, res) {
+const locations = [
+  {id: '1', name: 'Vilnius'},
+  {id: '2', name: 'Kaunas'},
+  {id: '3', name: 'Riga'},
+  {id: '4', name: 'Berlin'}
+]
+
+const apartments = [{
+  id: '1', name: 'DB super apartment', location: '2', free: 3
+},{
+  id: '2', name: 'DB turbo apartment', location: '1', free: 2
+},{
+  id: '3', name: 'DB omega apts', location: '3', free: 1
+}]
+
+app.get('/user/:userId', function (req, res) {
   res.send(users.find(user => user.id === req.params.userId))
 });
 
-
-app.use('/trips/:userId', function (req, res) {
+app.get('/trips/:userId', function (req, res) {
   const user = users.find(user => user.id === req.params.userId);
   if (!user) {
     res.send(createError())
   }
   res.send(trips.filter(trip => user.trips.includes(trip.id)))
 });
+
+
+app.get('/trips', function (req, res) {
+  res.send(trips)
+});
+
+app.post('/trip/create', function (req, res) {
+  res.send(trips)
+});
+
+//update trip
+app.post('/trip/:tripId', function (req, res) {
+  res.send(200)
+});
+
+app.get('/users', function (req, res) {
+  res.send(users.map(u => ({id: u.id, name: u.name})));
+});
+
+app.get('/locations', function (req, res) {
+  res.send(locations);
+});
+
+app.get('/apartments/:locationId', function (req, res) {
+  res.send(apartments.filter(a => a.location === req.params.locationId ));
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
