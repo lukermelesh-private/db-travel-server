@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node -r esm ./src/index.js",
-    "start:debug": "DEBUG=db-travel-http-server:* npm start"
+    "start:debug": "DEBUG=db-travel-http-server:* npm start",
+    "test": "ava",
+    "test:watch": "ava -w"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -16,5 +18,8 @@
     "lodash": "^4.17.15",
     "mongoose": "^5.9.9",
     "morgan": "~1.9.0"
+  },
+  "devDependencies": {
+    "ava": "^3.8.2"
   }
 }
