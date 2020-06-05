@@ -6,9 +6,10 @@
     "start": "node -r esm ./src/index.js",
     "start:debug": "DEBUG=db-travel-http-server:* npm start",
     "test": "ava",
-    "test:watch": "ava -w"
+    "test:watch": "ava -w --verbose"
   },
   "dependencies": {
+    "bcrypt": "^4.0.1",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
@@ -21,5 +22,10 @@
   },
   "devDependencies": {
     "ava": "^3.8.2"
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ]
   }
 }
