@@ -14,7 +14,7 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
-export const start = async () => {
+export async function start() {
   try {
     await connect()
     app.listen(config.port, () => {
